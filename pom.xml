@@ -18,6 +18,9 @@
         <java.version>17.0.7</java.version>
         <selenium.version>4.10.0</selenium.version>
         <testng.version>7.8.0</testng.version>
+        <log4j.version>2.17.2</log4j.version>
+        <webdrivermanager.version>5.2.1</webdrivermanager.version>
+        <assertj.version>3.23.0</assertj.version>
         <suiteFile>*.xml</suiteFile>
     </properties>
 
@@ -61,7 +64,20 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.17.2</version>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!-- WebDriverManager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
         </dependency>
     </dependencies>
 

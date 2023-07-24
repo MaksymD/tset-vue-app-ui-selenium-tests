@@ -3,6 +3,7 @@
 
 # TestNG suite execution reports
 test-output/
+/target/
 
 # Log files
 *.log
