@@ -8,7 +8,12 @@
         <classes>
             <class name="tests.PriceComponentsTests">
                 <methods>
-                    <include name="changeBasePrice"/>
+                    <include name="changeBasePrice_positiveTest"/>
+                    <include name="addAllPriceComponents_positiveTest"/>
+                    <include name="removePriceComponent_positiveTest"/>
+                    <include name="editNameComponent_positiveTest"/>
+                    <include name="editNegativePriceComponent_positiveTest"/>
+                    <include name="editPositivePriceComponent_positiveTest"/>
                 </methods>
             </class>
         </classes>
@@ -20,7 +25,12 @@
         <classes>
             <class name="tests.PriceComponentsTests">
                 <methods>
-                    <include name="changeBasePrice"/>
+                    <include name="changeBasePrice_positiveTest"/>
+                    <include name="addAllPriceComponents_positiveTest"/>
+                    <include name="removePriceComponent_positiveTest"/>
+                    <include name="editNameComponent_positiveTest"/>
+                    <include name="editNegativePriceComponent_positiveTest"/>
+                    <include name="editPositivePriceComponent_positiveTest"/>
                 </methods>
             </class>
         </classes>

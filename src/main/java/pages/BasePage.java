@@ -8,8 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import utils.WebDriverFactory;
 
 import java.io.IOException;
@@ -32,14 +30,12 @@ public abstract class BasePage {
         this.driver = WebDriverFactory.createInstance(browser);
     }
 
-
-    @BeforeMethod
-    public void setUP() {
+    public void setUp(WebDriver driver) {
+        this.driver = driver;
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
@@ -74,6 +70,7 @@ public abstract class BasePage {
     protected void fillInputField(By field, String text) {
         this.logger.info("Fill field ( " + field.toString() + " ) with ( " + text + " ).");
         WebElement element = this.find(field);
+        element.click();
         element.clear();
         element = this.find(field);
         element.sendKeys(text);

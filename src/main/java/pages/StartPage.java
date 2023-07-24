@@ -23,16 +23,18 @@ public class StartPage extends BasePage {
     By button_pencilBasePrice = By.xpath(properties.getProperty("Locator.StartPage.button_pencilBasePrice"));
     By inputNumber_BasePrice = By.xpath(properties.getProperty("Locator.StartPage.inputNumber_BasePrice"));
     By text_TotalPrice = By.xpath(properties.getProperty("Locator.StartPage.text_TotalPrice"));
+    By inputNewLabel_LabelName = By.xpath(properties.getProperty("Locator.StartPage.inputNewLabel_LabelName"));
+    By inputNewLabel_LabelPrice = By.xpath(properties.getProperty("Locator.StartPage.inputNewLabel_LabelPrice"));
 
     public StartPage(WebDriver driver, Properties properties) {
         super(driver, properties);
     }
 
-    public void moveCursorToBestPrice() {
+    public void moveCursorToLocator(String locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='BasePrice']")));
+        By xpathElement = By.xpath(locator);
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(xpathElement));
         Actions actions = new Actions(driver);
-        //WebElement basePriceElement = driver.findElement(By.xpath("//div[@id='BasePrice']"));
         actions.moveToElement(element).perform();
     }
 
@@ -52,5 +54,41 @@ public class StartPage extends BasePage {
         WebElement elementTotal = driver.findElement(text_TotalPrice);
         String actualTotal = elementTotal.getText();
         assertEquals(number, actualTotal);
+    }
+
+    public void setName_NewLabelName(String name_newLabel) {
+        assertTrue("Element is not present.", isElementPresent(inputNewLabel_LabelName));
+        fillInputField(inputNewLabel_LabelName, name_newLabel);
+    }
+
+    public void setName_NewLabelName(String name_newLabel, String locator) {
+        By xpathElement = By.xpath(locator);
+        assertTrue("Element is not present.", isElementPresent(xpathElement));
+        fillInputField(xpathElement, name_newLabel);
+    }
+
+    public void setName_NewLabelPrice(String price_newLabel) {
+        assertTrue("Element is not present.", isElementPresent(inputNewLabel_LabelPrice));
+        fillInputField(inputNewLabel_LabelPrice, price_newLabel);
+    }
+
+    public void setName_NewLabelPrice(String price_newLabel, String locator) {
+        By xpathElement = By.xpath(locator);
+        assertTrue("Element is not present.", isElementPresent(xpathElement));
+        fillInputField(xpathElement, price_newLabel);
+    }
+
+    public void checkAddedLabelPrice(String name, String expectedPrice) {
+        String xPathSample = properties.getProperty("Locator.StartPage.text_LabelPrice");
+        String xPath_byLabelName = xPathSample.replaceAll("XXX", name);
+        WebElement element_byLabelName = find(By.xpath(xPath_byLabelName));
+        assertTrue("Element is not present.", isElementPresent(By.xpath(xPath_byLabelName)));
+        String actualAddedLabelPrice = element_byLabelName.getText();
+        assertEquals(expectedPrice, actualAddedLabelPrice);
+    }
+
+    public void checkByLocator(String locator) {
+        By xpathElement = By.xpath(locator);
+        assertTrue("Element is not present.", isElementPresent(xpathElement));
     }
 }
