@@ -1,0 +1,12 @@
+# IntelliJ IDEA files
+.idea/
+
+# TestNG suite execution reports
+test-output/
+
+# Log files
+*.log
+
+# Vue.js build output
+/dist/
+/node_modules/

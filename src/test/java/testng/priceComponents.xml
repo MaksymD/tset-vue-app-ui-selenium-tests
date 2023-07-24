@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="VueAppTestSuite_ForPriceComponents">
+    <test name="TODO">
+        <classes>
+            <!--<class name="TODO"/>-->
+        </classes>
+    </test>
+</suite>
