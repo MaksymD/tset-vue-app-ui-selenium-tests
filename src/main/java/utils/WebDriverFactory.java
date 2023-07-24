@@ -6,7 +6,7 @@ import utils.manager.ChromeDriverManager;
 import utils.manager.FirefoxDriverManager;
 
 public class WebDriverFactory {
-    public WebDriver createInstance(String browser) {
+    public static WebDriver createInstance(String browser) {
         WebDriver driver;
         BrowserList browserType = BrowserList.valueOf(browser.toUpperCase());
 
@@ -24,4 +24,3 @@ public class WebDriverFactory {
         return driver;
     }
 }
-

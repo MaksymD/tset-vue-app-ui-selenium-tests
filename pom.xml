@@ -74,6 +74,7 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
 
+        <!-- AssertJ -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
