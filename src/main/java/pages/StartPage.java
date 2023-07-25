@@ -5,11 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Duration;
 import java.util.Properties;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -30,18 +28,16 @@ public class StartPage extends BasePage {
         super(driver, properties);
     }
 
+
+    public void checkPageTitle(){
+        getPageTitle("Vite App");
+    }
+
     public void moveCursorToLocator(String locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         By xpathElement = By.xpath(locator);
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(xpathElement));
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
-    }
-
-    public void clickByLocator(String locator) {
-        By xpathElement = By.xpath(locator);
-        assertTrue("Element is not present.", isElementPresent(xpathElement));
-        click(xpathElement);
     }
 
     public void setNumber_BasePrice(String number) {
@@ -87,8 +83,8 @@ public class StartPage extends BasePage {
         assertEquals(expectedPrice, actualAddedLabelPrice);
     }
 
-    public void checkByLocator(String locator) {
-        By xpathElement = By.xpath(locator);
+    public void checkErrorMsgByLocator(String locator_errorMsg) {
+        By xpathElement = By.xpath(locator_errorMsg);
         assertTrue("Element is not present.", isElementPresent(xpathElement));
     }
 }

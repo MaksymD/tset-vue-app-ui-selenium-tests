@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -16,28 +18,37 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public abstract class BasePage {
     protected Properties properties;
     protected WebDriver driver;
+    protected WebDriverWait wait;
+    private static final int TIMEOUT = 30;
+    private static final int EACH_NEW_ATTEMPT = 5;
     private final Logger logger = LoggerFactory.getLogger(BasePage.class);
 
-    public BasePage(WebDriver driver, Properties properties) {
+    protected BasePage(WebDriver driver, Properties properties) {
         this.driver = driver;
         this.properties = properties;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT), Duration.ofSeconds(EACH_NEW_ATTEMPT));
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
     }
 
-    public BasePage(String browser) {
+    protected BasePage(String browser) {
         this.driver = WebDriverFactory.createInstance(browser);
     }
 
-    public void setUp(WebDriver driver) {
+    protected void setUp(WebDriver driver) {
         this.driver = driver;
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TIMEOUT));
     }
 
-    public void tearDown() {
-        driver.quit();
+    protected void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     protected Properties loadProperties(String propertyFile) throws IOException {
@@ -46,6 +57,14 @@ public abstract class BasePage {
             properties.load(inputStream);
         }
         return properties;
+    }
+
+    protected void getPageTitle(String expectedPageTitle) {
+        String pageTitle = this.driver.getTitle();
+        if (!pageTitle.equals(expectedPageTitle)) {
+            throw new IllegalStateException(pageTitle + " -> This is not expected Page Title," +
+                    " current page is: " + driver.getCurrentUrl());
+        }
     }
 
     public String getTitle() {
@@ -58,6 +77,12 @@ public abstract class BasePage {
 
     protected boolean isElementPresent(By locator) {
         return this.isElementPresent(locator, true);
+    }
+
+    public void clickByLocator(String locator) {
+        By xpathElement = By.xpath(locator);
+        assertTrue("Element is not present.", isElementPresent(xpathElement));
+        click(xpathElement);
     }
 
     protected void click(By locator) {

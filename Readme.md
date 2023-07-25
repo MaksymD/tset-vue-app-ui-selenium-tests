@@ -10,3 +10,9 @@ Before running the tests, ensure you have the following installed:
 
 Test running on 'Tset Test App', run application before test local:
 https://github.com/tsetweb/tset-tester-challenge
+
+### TODO's
+- implement WebDriverManager
+- fix public methods in BasePage class (like clickByLocator())
+- fix tearDown() and setUp() methods in BasePage class 
+- fix createInstance() method

@@ -2,7 +2,7 @@
 <suite name="VueAppTestSuite_ForPriceComponents" verbose="2"
        parallel="false">
 
-    <test name="chrome tests" parallel="false">
+    <!--<test name="chrome tests" parallel="false">
         <parameter name="browser" value="chrome"/>
         <parameter name="property_file" value="global.properties" />
         <classes>
@@ -17,7 +17,7 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 
     <test name="firefox tests" parallel="false">
         <parameter name="browser" value="firefox"/>
